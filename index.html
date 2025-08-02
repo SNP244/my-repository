@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>QuickDesk - Helpdesk Platform</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <nav class="navbar">
+    <h1>QuickDesk</h1>
+    <div class="nav-buttons" id="authButtons">
+    <button onclick="showModal('loginModal')">Login</button>
+    <button onclick="showModal('signupModal')">Signup</button>
+  </div>
+  <div class="nav-buttons hidden" id="logoutSection">
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  </nav>
+
+  <main>
+    <!-- Dashboard -->
+    <section id="dashboard" class="hidden">
+      <h2>Welcome to Dashboard</h2>
+
+      <!-- Ticket Creation -->
+      <div class="card">
+        <h3>Create Ticket</h3>
+        <input type="text" id="subject" placeholder="Subject" required>
+        <textarea id="description" placeholder="Description" required></textarea>
+        <input type="number" id="categoryId" placeholder="Category ID" required>
+        <button onclick="createTicket()">Submit Ticket</button>
+      </div>
+
+      <!-- My Tickets -->
+      <div class="card">
+        <h3>My Tickets</h3>
+        <button onclick="fetchMyTickets()">Load Tickets</button>
+        <ul id="ticketList"></ul>
+      </div>
+
+      <!-- All Tickets (For Agents Only) -->
+<div class="card hidden" id="allTicketsSection">
+  <h3>All Tickets (Agent)</h3>
+  <button onclick="fetchAllTickets()">Load All Tickets</button>
+  <ul id="allTicketList"></ul>
+</div>
+
+
+
+      <!-- Comment System -->
+      <div class="card">
+        <h3>Comments</h3>
+        <input type="number" id="ticketId" placeholder="Ticket ID" required>
+        <textarea id="commentMessage" placeholder="Write a comment..."></textarea>
+        <button onclick="addComment()">Add Comment</button>
+        <ul id="commentList"></ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- Login Modal -->
+  <div class="modal hidden" id="loginModal">
+    <div class="modal-content">
+      <h2>Login</h2>
+      <input type="email" id="loginEmail" placeholder="Email" required>
+      <input type="password" id="loginPassword" placeholder="Password" required>
+      <button onclick="login()">Login</button>
+      <button class="close-btn" onclick="hideModal('loginModal')">Close</button>
+    </div>
+  </div>
+
+  <!-- Signup Modal -->
+  <div class="modal hidden" id="signupModal">
+    <div class="modal-content">
+      <h2>Signup</h2>
+      <input type="text" id="signupName" placeholder="Full Name" required>
+      <input type="email" id="signupEmail" placeholder="Email" required>
+      <input type="password" id="signupPassword" placeholder="Password" required>
+      <select id="signupRole">
+        <option value="END_USER">End User</option>
+        <option value="AGENT">Agent</option>
+      </select>
+      <button onclick="signup()">Signup</button>
+      <button class="close-btn" onclick="hideModal('signupModal')">Close</button>
+    </div>
+  </div>
+</body>
+</html>
