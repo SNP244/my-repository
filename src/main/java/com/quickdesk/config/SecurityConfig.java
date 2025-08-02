@@ -35,10 +35,15 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(csrf -> csrf.disable())
+                
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll()
-                        .anyRequest().authenticated()
-                )
+    .requestMatchers("/api/auth/**").permitAll()
+    .requestMatchers("/api/categories/**").permitAll()        
+    .requestMatchers("/api/tickets/**").authenticated()    
+    .anyRequest().authenticated()
+)
+
+                
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

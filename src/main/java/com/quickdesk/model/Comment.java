@@ -2,14 +2,15 @@ package com.quickdesk.model;
 
 
 
+
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -20,12 +21,13 @@ public class Comment {
     private Long id;
 
     @ManyToOne
+    @JsonBackReference(value = "ticketCommentRef")
     private Ticket ticket;
 
     @ManyToOne
     private User author;
 
-    private String content;
+    private String message;
 
-    private LocalDateTime timestamp;
+    private LocalDateTime createdAt;
 }

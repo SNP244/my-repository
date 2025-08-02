@@ -6,6 +6,8 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Getter
 @Setter
@@ -22,18 +24,21 @@ public class Ticket {
     private String description;
 
     @Enumerated(EnumType.STRING)
-    private TicketStatus status;
+    private TicketStatus status= TicketStatus.OPEN;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
+    @JsonBackReference
     private Category category;
 
     @ManyToOne
     @JoinColumn(name = "created_by_id")
+    @JsonBackReference(value = "createdByRef")
     private User createdBy;
 
     @ManyToOne
     @JoinColumn(name = "assigned_to_id")
+    @JsonBackReference(value = "assignedToRef")
     private User assignedTo;
 
     private int upvotes;
